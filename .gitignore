@@ -1,3 +1,6 @@
 a00p2
 __pycache__
 a03p2
+a04
+*.hi
+*.o
