@@ -3,5 +3,7 @@ __pycache__
 a03p2
 a04
 *.hi
+*.pyc
 *.o
+a06.hs
 a05
