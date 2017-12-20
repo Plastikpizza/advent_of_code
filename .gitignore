@@ -5,12 +5,5 @@ a04
 *.hi
 *.pyc
 *.o
-a05
-a07
-a08
-a09
-a10
-a11
-a12
-a13
-a14
+a??
+Split.hs
