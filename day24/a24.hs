@@ -1,7 +1,5 @@
 import Split
 
-
-
 data Bridge = Bridge {pairs::[(Int, Int)], end::Int, pool::[(Int, Int)]}
    deriving (Eq, Show)
 
