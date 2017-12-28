@@ -32,5 +32,5 @@ main = do
    let bridges = buildBridge (Bridge [] 0 allPairs)
    print $ maximum $ map rateBridge $ bridges
    let len = maximum $ map (length . pairs) bridges
-   let briges1 = [b | b <- bridges, (length $ pairs b) == len]
-   print $ maximum $ map rateBridge $ briges1
+   let longestBridges = [b | b <- bridges, (length $ pairs b) == len]
+   print $ maximum $ map rateBridge $ longestBridges
