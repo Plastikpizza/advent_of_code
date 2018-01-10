@@ -44,7 +44,8 @@ execute cpu = case cmd of
       nextMessage = (show ((head . messages . other) cpu))
 
 partTwo cpu
-   | stuck cpu && stuck (other cpu) = sendCount cpu
+   | stuck cpu && stuck (other cpu) =
+      (name cpu, sendCount cpu, name $ other cpu, sendCount $ other cpu)
    | otherwise = (partTwo . execute) cpu
 
 main = do
