@@ -7,3 +7,4 @@ a04
 *.o
 a??
 Split.hs
+day14/a10.py
