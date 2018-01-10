@@ -1,4 +1,3 @@
-import Debug.Trace (trace)
 data Spinlock = Spinlock {pos::Int, circle::[Int]} deriving (Show)
 
 insertAfter v 0 (l:r) = l : v : r
