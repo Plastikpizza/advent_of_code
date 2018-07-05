@@ -1,54 +1,32 @@
 import Debug.Trace (trace)
-data Square t =
-   One t
-   | Two {a::Square t,b::Square t,
-          c::Square t,d::Square t}
-   | Three {a::Square t,b::Square t,c::Square t,
-            d::Square t,e::Square t,f::Square t,
-            g::Square t,h::Square t,i::Square t}
+data Square =
+   One Char
+   | Two {a::Square,b::Square,
+          c::Square,d::Square}
+   | Three {a::Square,b::Square,c::Square,
+            d::Square,e::Square,f::Square,
+            g::Square,h::Square,i::Square}
    deriving (Eq, Show)
 
-data Rule t1 t2 = Rule {input::Square t1, output::Square t2} deriving (Show)
+data Rule = Rule {input::Square, output::Square} deriving (Show)
 
--- instance (Show t) => Show (Square t) where
---    show (One a) = show a
---    show (Two a b c d)
---       = (show a) ++  (show b) ++ "/" ++ (show c) ++  (show d)
---    show (Three a b c d e f g h i)
---       =  (show a) ++ (show b) ++ (show c) ++ "/"
---       ++ (show d) ++ (show e) ++ (show f) ++ "/"
---       ++ (show g) ++ (show h) ++ (show i)
 
-class Modify a where
-   turn   :: a -> a
-   mirror :: a -> a
-   turn   = id
-   mirror = id
-
-instance Modify Integer
-instance Modify Int
-instance Modify Float
-instance Modify Char
-instance Modify [a]
-instance Modify Bool
-
-instance (Modify t) => Modify (Square t) where
-   turn (One a) = One a
-   turn (Two a b c d)
-      = Two (turn b) (turn d)
-            (turn a) (turn c)
-   turn (Three a b c d e f g h i)
-      = Three (turn c) (turn f) (turn i)
-              (turn b) (turn e) (turn h)
-              (turn a) (turn d) (turn g)
-   mirror (One a) = One a
-   mirror (Two a b c d)
-      = Two (mirror b) (mirror a)
-            (mirror d) (mirror c)
-   mirror (Three a b c d e f g h i)
-      = Three (mirror c) (mirror b) (mirror a)
-              (mirror f) (mirror e) (mirror d)
-              (mirror i) (mirror h) (mirror g)
+turn (One a) = One a
+turn (Two a b c d)
+   = Two (turn b) (turn d)
+         (turn a) (turn c)
+turn (Three a b c d e f g h i)
+   = Three (turn c) (turn f) (turn i)
+           (turn b) (turn e) (turn h)
+           (turn a) (turn d) (turn g)
+mirror (One a) = One a
+mirror (Two a b c d)
+   = Two (mirror b) (mirror a)
+         (mirror d) (mirror c)
+mirror (Three a b c d e f g h i)
+   = Three (mirror c) (mirror b) (mirror a)
+           (mirror f) (mirror e) (mirror d)
+           (mirror i) (mirror h) (mirror g)
 
 parseSquare (a:b:'/':c:d:[])
    = Two (One a) (One b)
@@ -99,7 +77,7 @@ swap  (Two (Three aa ab ba
                (Two ga gb
                     gc gd) (Two ha hb
                                 hc hd) (Two ia ib
-                                           ic idd))
+                                            ic idd))
 
 swap (Two a b c d) = Two (swap a) (swap b) (swap c) (swap d)
 swap (Three a b c d e f g h i) = Three (swap a) (swap b) (swap c) (swap d) (swap e) (swap f) (swap g) (swap h) (swap i)
